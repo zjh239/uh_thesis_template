@@ -49,7 +49,7 @@
 This page is copyright info
 #pagebreak(weak: true, to: "odd")
 
-#heading(numbering: none, outlined: true, level: 1)[Aknowledgement]
+#heading(numbering: none, outlined: true, level: 1)[Acknowledgement]
 Some people prefer putting this at the end. It is a matter of taste to my opinion.
 #pagebreak(weak: true, to: "odd")
 
