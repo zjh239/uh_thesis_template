@@ -13,28 +13,29 @@
   set page(paper: m_paper,
           margin: (top: 3cm, bottom: 2.5cm, inside: 2.5cm, outside: 2cm),
     
-    footer: context{ 
-      // text()[TAU #h(1fr) #counter(page).get().first()]
-    },
+    footer: none,
     numbering: "1",
   )
   set terms(indent: 1em, separator: h(1cm, weak: true) )
   set text(lang: "en", size: 10pt, font: "Noto Serif")
-  
-  // line spacing
   set par(leading: 0.5em, justify: true) 
   
   // math settings
   set math.equation(numbering: n => {
     let sn = counter(heading).get().first()
-      [#sn.#n]
+      [(#sn.#n)]
     })
   
   set heading(numbering: "1.1  ")
   
+  show heading: set par(justify: false)
   // chapter
   show heading.where(level: 1): it => {
     context {
+      counter(math.equation).update(0)
+      counter(figure.where(kind: image)).update(0)
+      counter(figure.where(kind: table)).update(0)
+
       pagebreak(to: "odd", weak: true)
       v(10%)
       if it.numbering != none {
@@ -60,23 +61,24 @@
     text(size: 1.0em, weight: "bold", it.body)
     v(0.2em)
   }
-  // figure and table
+
+  // figure (include image, table, code...)
   set figure(numbering: n => {
     let sn = counter(heading).get().first()
       [#sn.#n]
-    })
-  
+    }, placement: auto)
+
   show figure.where(
     kind: table
   ): set figure.caption(position: top)
 
   show figure.caption: it => {
-    text(weight: "bold", size: .9em)[#it.supplement #context it.counter.display(it.numbering)#it.separator]
+    let sn = counter(heading).get().first()
+    text(weight: "bold", size: .9em)[#it.supplement
+    #context it.counter.display(it.numbering)#it.separator]
     text(size: .9em)[ #it.body]}
 
-  set figure(
-    placement: auto
-  )
+  show figure.where(kind: image): set figure(supplement: [Fig.])
  
   let frame() = (x, y) => (
   left: none,
@@ -99,7 +101,21 @@
     v(0.5em)
     text(weight: "bold", it)
   }
-  
+  // bib spacing
+  show bibliography: it => {
+    set par(spacing: 0.8em)
+    it
+  }
+  // math equation refer as no parathesis
+  show ref: it => {
+    let eq = math.equation
+    let el = it.element
+    if el == none or el.func() != eq { return it }
+      let sec = counter(heading).at(el.location()).first()
+      let eq = counter(math.equation).at(el.location()).first()
+      link(el.location(), [Eq. #sec.#eq])
+  }
+
   body
 }
 

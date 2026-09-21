@@ -83,14 +83,17 @@ Some people prefer putting this at the end. It is a matter of taste to my opinio
 )
 #pagebreak(weak: true)
 #heading(numbering: none, outlined: true, level: 2)[Abbreviations]
-#table(
-  columns: (3em, 1fr),
-  align: (right, left),
-  column-gutter: 1em,
-  row-gutter: .5em,
-  stroke: none,
+#{
+  show table.cell.where(x: 0): set text(weight: "bold")
+  table(
+    columns: (3em, 1fr),
+    align: (right, left),
+    column-gutter: 1em,
+    row-gutter: .5em,
+    stroke: none,
 
-  [PEL], [Potential energy landscape],
-  [ART], [Activation-relaxation technique],
+    [PEL], [Potential energy landscape],
+    [ART], [Activation-relaxation technique],
 )
+}
 #pagebreak(weak: true, to: "odd")

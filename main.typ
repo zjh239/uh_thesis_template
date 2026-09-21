@@ -15,10 +15,11 @@
 #if m_title != "" {
     page(header: none, footer: none, numbering: none)[
     #align(center)[
+      #set par(justify: false)
       UNIVERSITY OF HELSINKI #h(1fr) REPORT SERIES IN PHYSICS #v(2em)
       HU-P-D??? #v(3em)
-      #text(size: 20pt, weight: "bold")[#m_title] #v(2em)
-      #text(size: 12pt, weight: "bold")[#m_author] #v(3em)
+      #text(size: 1.8em, weight: "bold")[#m_title] #v(2em)
+      #text(size: 1.3em, weight: "bold")[#m_author] #v(3em)
       Helsinki Accelerator Laboratory \ 
       Division of Materials Physics \
       Department of Physics \
@@ -29,7 +30,7 @@
       // #text(size: 14pt)[#date.display("[month repr:short] [day], [year]")]
       #v(1fr)
       DOCTORAL DISSERTATION #v(1em)
-      #text(style: "italic")[To be presented for public discussion with the permission of the Faculty of Science of University of Helsinki, in ??? place, on the ?? time] #v(1em)
+      #text(style: "italic", size: 0.9em)[To be presented for public discussion with the permission of the Faculty of Science of University of Helsinki, in ??? place, on the ?? time] #v(1em)
        HELSINKI 20??
     ]]
   }
